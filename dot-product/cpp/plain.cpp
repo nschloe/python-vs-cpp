@@ -11,7 +11,7 @@ int main() {
   std::mt19937 e2(rd());
   std::uniform_real_distribution<> dist(0, 1);
 
-  for (int pow = 0; pow < 26; pow++) {
+  for (int pow = 0; pow < 27; pow++) {
     const int n = std::pow(2, pow);
 
     // init vectors
