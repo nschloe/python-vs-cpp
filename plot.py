@@ -3,6 +3,7 @@ import json
 import os
 
 import matplotlib.pyplot as plt
+import numpy
 
 
 def argsort(seq):
@@ -29,15 +30,25 @@ def main():
     # sort by the last entry in timings
     order = argsort([d["timings"][-1] for d in data])[::-1]
 
-    for idx in order:
-        d = data[idx]
-        plt.loglog(d["n"], d["timings"], label=d["name"])
+    if args.relative:
+        ref = data[order[-1]]["timings"]
+        ref_name = data[order[-1]]["name"]
+        for idx in order:
+            d = data[idx]
+            r = numpy.array(d["timings"]) / ref[: len(d["timings"])]
+            plt.semilogx(d["n"], r, label=d["name"])
+        plt.ylabel(f"runtime relative to {ref_name}")
+        plt.ylim(0, 10)
+    else:
+        for idx in order:
+            d = data[idx]
+            plt.loglog(d["n"], d["timings"], label=d["name"])
+        plt.ylabel("runtime [s]")
 
     plt.grid()
     plt.legend()
     plt.title(title)
     plt.xlabel("n")
-    plt.ylabel("runtime [s]")
 
     if args.output_file is None:
         plt.show()
@@ -49,6 +60,13 @@ def get_parser():
     parser = argparse.ArgumentParser(description="Plot data")
     parser.add_argument("directory", type=str)
     parser.add_argument("-o", "--output-file", help="output image file")
+    parser.add_argument(
+        "-r",
+        "--relative",
+        default=False,
+        action="store_true",
+        help="plot timings relative to fastest",
+    )
 
     args = parser.parse_args()
     return args
