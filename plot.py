@@ -1,3 +1,4 @@
+import argparse
 import os
 import json
 import matplotlib.pyplot as plt
@@ -8,13 +9,15 @@ def argsort(seq):
 
 
 def main():
-    entry = "matrix-matrix-products/data-files.json"
+    args = get_parser()
+
+    entry = os.path.join(args.directory, "data-files.json")
     with open(entry, "r") as f:
         data = json.load(f)
 
     title = data["title"]
 
-    files = [os.path.join("matrix-matrix-products", f) for f in data["files"]]
+    files = [os.path.join(args.directory, f) for f in data["files"]]
 
     # read the data
     data = []
@@ -34,7 +37,21 @@ def main():
     plt.title(title)
     plt.xlabel("n")
     plt.ylabel("runtime [s]")
-    plt.show()
+
+    if args.output_file is None:
+        plt.show()
+    else:
+        plt.savefig(args.output_file, transparent=True, bbox_inches="tight")
+
+
+def get_parser():
+    parser = argparse.ArgumentParser(description='Plot data')
+    parser.add_argument('directory', type=str)
+    parser.add_argument('-o', "--output-file",
+                        help='output image file')
+
+    args = parser.parse_args()
+    return args
 
 
 if __name__ == "__main__":
