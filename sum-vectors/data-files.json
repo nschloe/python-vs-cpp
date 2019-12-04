@@ -1,0 +1,8 @@
+{
+  "title": "sum vectors",
+  "files": [
+    "cpp/plain.json",
+    "python/plain.json",
+    "python/numpy.json"
+  ]
+}
