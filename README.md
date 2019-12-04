@@ -2,11 +2,11 @@
 
 It is an often reiterated statement that
 
-> Interpreted code is always slower then compiled code. That's why we're using C in our
-> project.
+> Interpreted code is always slower then compiled code. We need speed! That's why we're
+> using C/C++ in our project.
 
-This assumption is based on the observation that large loops like for a dot product of
-two vectors `u`, `v`, are _much_ faster in C,
+This assumption is based on the correct observation that large loops like for a dot
+product of two vectors `u`, `v`, are _much_ faster in C,
 ```c++
 double out = 0.0
 for (int k=0; k < n; k++) {
@@ -14,7 +14,7 @@ for (int k=0; k < n; k++) {
 }
 ```
 than in Python:
-```
+```python
 out = 0.0
 for k in range(n):
     out[k] += u[k] * v[k]
@@ -22,14 +22,19 @@ for k in range(n):
 If you care about speed, you wouldn't do either of the above loops, though. In Python,
 most everyone does
 ```python
+import numpy
+
 out = numpy.dot(u, v)
 ```
-anyway. In C/C++, it's not as easy.
+anyway. For C/C++,
 [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page),
 [CBLAS](http://www.netlib.org/blas/#_cblas), and [Boost](https://www.boost.org/) come to
 mind.
 
-I
+This repository contains a comparison of some common costly numerical operations between
+C++ and Python.
+
+As always, comments and suggestions are welcome!
 
 
 ### Dot product of two vectors
