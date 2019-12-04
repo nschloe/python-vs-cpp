@@ -8,8 +8,8 @@
 
 ### Matrix-matrix product
 
-<img src="https://nschloe.github.io/python-vs-cpp/matrix-matrix-product.svg" width="100%"> |
-<img src="https://nschloe.github.io/python-vs-cpp/matrix-matrix-product-relative.svg" width="100%">
+<img src="https://nschloe.github.io/python-vs-cpp/matrix-matrix-products.svg" width="100%"> |
+<img src="https://nschloe.github.io/python-vs-cpp/matrix-matrix-products-relative.svg" width="100%">
 :--------:|:--------:|
 
 ### Sum entries in a vector
