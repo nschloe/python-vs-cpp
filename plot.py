@@ -8,13 +8,13 @@ def argsort(seq):
 
 
 def main():
-    entry = "sum-vectors/data-files.json"
+    entry = "matrix-matrix-products/data-files.json"
     with open(entry, "r") as f:
         data = json.load(f)
 
     title = data["title"]
 
-    files = [os.path.join("sum-vectors", f) for f in data["files"]]
+    files = [os.path.join("matrix-matrix-products", f) for f in data["files"]]
 
     # read the data
     data = []
