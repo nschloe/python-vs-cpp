@@ -1,5 +1,6 @@
-import numpy
 import time
+
+import numpy
 
 r = 100
 for k in range(27):

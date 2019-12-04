@@ -1,23 +1,15 @@
-import numpy
 import time
+
+import numpy
 
 r = 1
 for k in range(15):
     n = 2 ** k
-    u = [
-        numpy.random.rand(n).tolist()
-        for _ in range(n)
-    ]
-    v = [
-        numpy.random.rand(n).tolist()
-        for _ in range(n)
-    ]
-    t = 1.0e+10  # something huge
+    u = [numpy.random.rand(n).tolist() for _ in range(n)]
+    v = [numpy.random.rand(n).tolist() for _ in range(n)]
+    t = 1.0e10  # something huge
     for _ in range(r):
-        out = [
-            numpy.random.rand(n).tolist()
-            for _ in range(n)
-        ]
+        out = [numpy.random.rand(n).tolist() for _ in range(n)]
         t0 = time.time_ns()
         for i in range(n):
             for j in range(n):

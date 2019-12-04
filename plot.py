@@ -1,6 +1,7 @@
 import argparse
-import os
 import json
+import os
+
 import matplotlib.pyplot as plt
 
 
@@ -45,10 +46,9 @@ def main():
 
 
 def get_parser():
-    parser = argparse.ArgumentParser(description='Plot data')
-    parser.add_argument('directory', type=str)
-    parser.add_argument('-o', "--output-file",
-                        help='output image file')
+    parser = argparse.ArgumentParser(description="Plot data")
+    parser.add_argument("directory", type=str)
+    parser.add_argument("-o", "--output-file", help="output image file")
 
     args = parser.parse_args()
     return args
