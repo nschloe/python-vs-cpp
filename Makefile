@@ -16,3 +16,7 @@ plots:
 
 clean:
 	rm -f *.svg
+
+format:
+	isort .
+	black .
