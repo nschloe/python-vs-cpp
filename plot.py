@@ -1,7 +1,8 @@
 import argparse
 import json
-import os
+import pathlib
 
+import dufte
 import matplotlib.pyplot as plt
 import numpy
 
@@ -13,13 +14,15 @@ def argsort(seq):
 def main():
     args = get_parser()
 
-    entry = os.path.join(args.directory, "data-files.json")
+    directory = pathlib.Path(args.directory)
+
+    entry = directory / "data-files.json"
     with open(entry, "r") as f:
         data = json.load(f)
 
     title = data["title"]
 
-    files = [os.path.join(args.directory, f) for f in data["files"]]
+    files = [directory / f for f in data["files"]]
 
     # read the data
     data = []
@@ -29,6 +32,8 @@ def main():
 
     # sort by the last entry in timings
     order = argsort([d["timings"][-1] for d in data])[::-1]
+
+    plt.style.use(dufte.style)
 
     if args.relative:
         ref = data[order[-1]]["timings"]
@@ -45,8 +50,7 @@ def main():
             plt.loglog(d["n"], d["timings"], label=d["name"])
         plt.ylabel("runtime [s]")
 
-    plt.grid()
-    plt.legend()
+    dufte.legend()
     plt.title(title)
     plt.xlabel("n")
 
